@@ -1,0 +1,17 @@
+<div>
+  <h1>Your Favorites</h1>
+</div>
+<div class="favorited-wrapper">
+  <mat-card *ngFor="let movie of active;" class="favorited-card">
+    <mat-card-header>
+      <mat-card-title>{{movie.Title}}</mat-card-title>
+    </mat-card-header>
+    <img style="width: 250px;" src={{movie.ImagePath}} alt={{movie.Title}} />
+    <mat-card-actions style="align-items: center; display: flex; flex-direction: column-reverse;">
+      <button mat-icon-button aria-label="remove movie from favorites"
+        (click)="deleteMovieFromFavorites(movie._id, movie.Title)">
+        <mat-icon aria-label="heart icon">delete</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

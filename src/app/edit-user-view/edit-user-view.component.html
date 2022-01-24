@@ -1,0 +1,34 @@
+<mat-card style="display: flex; flex-direction: column;">
+  <mat-card-header style="display: flex; justify-content: space-between;">
+    <mat-card-title>Edit Profile</mat-card-title>
+    <button mat-icon-button>
+      <mat-icon [mat-dialog-close]="true">close</mat-icon>
+    </button>
+  </mat-card-header>
+  <mat-card-content>
+    <form>
+      <mat-form-field>
+        <input matInput [(ngModel)]="userData.Username" placeholder="Username" type="text" name="Username" required>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [(ngModel)]="userData.Password" type="password" placeholder="Password" name="Password" required>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [(ngModel)]="userData.Email" type="email" placeholder="Email" name="Email" required>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [(ngModel)]="userData.Birthday" type="date" placeholder="Birthday" name="Birthday">
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <div class="edit-profile-btns">
+      <button mat-raised-button color="primary" (click)="editUser()">
+        Change
+      </button>
+      <button mat-raised-button color="warn" (click)="deleteUser()">
+        Delete Profile
+      </button>
+    </div>
+  </mat-card-actions>
+</mat-card>

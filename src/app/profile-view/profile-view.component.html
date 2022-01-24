@@ -1,0 +1,21 @@
+<div class="profile-wrapper">
+  <div class="profile-header">
+    <div style="display: flex;">
+      <h1>Profile</h1>
+      <button mat-icon-button [mat-dialog-close]="true" aria-label="Example icon-button with edit icon"
+        (click)="openEditUserDialog()">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </div>
+    <button mat-icon-button>
+      <mat-icon [mat-dialog-close]="true">close</mat-icon>
+    </button>
+  </div>
+  <div style="display: flex; flex-direction:column; align-items: center;">
+    <h2>Hey there! {{user.Username}}</h2>
+    <h3>Email</h3>
+    <p>{{user.Email}}</p>
+    <h3>Birthday</h3>
+    <p>{{user.Birthday | date}}</p>
+  </div>
+</div>

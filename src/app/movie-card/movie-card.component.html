@@ -1,0 +1,51 @@
+<!-- src/app/movie-card/movie-card.component.html -->
+<p>
+  <mat-toolbar style="background-color: #202124; color: white" class="toolbar-wrapper">
+    <span>Skullify</span>
+    <div>
+      <button mat-icon-button (click)="openFavoritesViewDialog()">
+        <mat-icon>favorite</mat-icon>
+      </button>
+      <button mat-icon-button class="example-icon" aria-label="Profile Button" (click)="openProfileViewDialog()">
+        <mat-icon>person</mat-icon>
+      </button>
+      <button mat-icon-button class="example-icon" aria-label="Log Out Button" (click)="onLogOut()">
+        <mat-icon>exit_to_app</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
+</p>
+<div class="movie-list-wrapper">
+  <mat-card *ngFor="let movie of movies;" class="movie-card">
+    <mat-card-header>
+      <mat-card-title>{{movie.Title}}</mat-card-title>
+      <mat-card-subtitle>Directed by: {{movie.Director.Name}}</mat-card-subtitle>
+    </mat-card-header>
+    <img class="movie-poster-image" src={{movie.ImagePath}} alt={{movie.Title}} />
+    <mat-card-actions style="align-items: center; display: flex; flex-direction: column-reverse;">
+      <button mat-button color="primary" (click)="openGenreViewDialog(
+        movie.Genre.Title,
+        movie.Genre.Description
+      )">
+        {{movie.Genre.Title}}
+      </button>
+      <button mat-button color="primary" (click)="openDirectorViewDialog(
+        movie.Director.Name,
+        movie.Director.Bio
+      )">
+        Director
+      </button>
+      <button mat-button color="primary" (click)="openMovieViewDialog(
+        movie.Title,
+        movie.Description,
+        movie.Featured,
+        movie.ImagePath
+      )">
+        Synopsis
+      </button>
+      <button mat-icon-button (click)="toggleFav(movie._id, movie.Title)" [color]="isFav(movie._id)">
+        <mat-icon>favorite</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

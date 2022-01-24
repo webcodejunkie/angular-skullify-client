@@ -48,10 +48,9 @@ export class FetchApiDataService {
     );
   }
   // API call to edit user
-  editUser(userDetails: any): Observable<any> {
-    const username = localStorage.getItem('user');
+  editUser(username: string, userDetails: any): Observable<any> {
     const token = localStorage.getItem('token');
-    return this.http.put(apiUrl + 'users/' + username + userDetails, {
+    return this.http.put(apiUrl + 'users/' + username, userDetails, {
       headers: new HttpHeaders(
         {
           Authorization: 'Bearer ' + token,
@@ -62,18 +61,16 @@ export class FetchApiDataService {
     );
   }
   // API call to delete user
-  deleteUser(): Observable<any> {
-    const username = localStorage.getItem('user');
+  deleteUser(username: string): Observable<any> {
     const token = localStorage.getItem('token');
-    return this.http.delete(apiUrl + 'users/' + username, {
-      headers: new HttpHeaders(
-        {
-          Authorization: 'Bearer ' + token,
-        })
-    }).pipe(
-      map(this.extractResponseData),
-      catchError(this.handleError)
+    const response = this.http.delete(apiUrl + 'users/' + username,
+      /**
+       * Because this request returns a text response rather than a JSON object, the response type
+       * must be specified in the request.
+       */
+      { headers: new HttpHeaders({ Authorization: 'Bearer ' + token, }), responseType: 'text' }
     );
+    return response.pipe(catchError(this.handleError));
   }
   // API to get full list of movies
   getAllMovies(): Observable<any> {
@@ -102,10 +99,9 @@ export class FetchApiDataService {
     );
   }
   // API call to favorite a single movie and add it to users favorited array
-  addFavoriteMovie(movieId: any): Observable<any> {
-    const username = localStorage.getItem('user')
+  addFavoriteMovie(username: string, movieID: any): Observable<any> {
     const token = localStorage.getItem('token');
-    return this.http.post(apiUrl + 'users/' + username + movieId, {
+    return this.http.post(apiUrl + `users/${username}/movies/${movieID}`, {}, {
       headers: new HttpHeaders(
         {
           Authorization: 'Bearer ' + token,
@@ -116,10 +112,9 @@ export class FetchApiDataService {
     );
   }
   // API call to remove favorited movie from user array
-  removeFavoriteMovie(movieId: any): Observable<any> {
-    const username = localStorage.getItem('user')
+  removeFavoriteMovie(username: any, movieID: any): Observable<any> {
     const token = localStorage.getItem('token');
-    return this.http.delete(apiUrl + 'users/' + username + movieId, {
+    return this.http.delete(apiUrl + `users/${username}/movies/${movieID}`, {
       headers: new HttpHeaders(
         {
           Authorization: 'Bearer ' + token,
