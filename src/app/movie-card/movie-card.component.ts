@@ -19,16 +19,21 @@ import { FavoritedMoviesViewComponent } from '../favorited-movies-view/favorited
 export class MovieCardComponent implements OnInit {
 
   username = localStorage.getItem('user') || '';
-  movies: any[] = [];
-  favorites: any[] = [];
+  movies: any[] = []; // movie array to store all our movies
+  favorites: any[] = []; // array to contain all of our favorites we choose to heart
 
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialog: MatDialog,
     public snackBar: MatSnackBar,
     private router: Router,
-  ) { dialog.afterAllClosed.subscribe(() => this.ngOnInit()) }
+  ) {
+    dialog.afterAllClosed.subscribe(() => this.ngOnInit()) // on dialog close, refresh component - used to refresh the hearts on cards
+  }
 
+  /**
+   * on load, perform these functions to fetch movies and whether something is favorited i.e. this.isFav;
+   */
   ngOnInit(): void {
     this.getMovies();
     this.getFavMovies();
@@ -53,10 +58,14 @@ export class MovieCardComponent implements OnInit {
       return this.getMovies;
     });
   }
-  // API function call to add to the favorites array
+  /**
+   * 
+   * @param {string} movieID 
+   * @param {string} title 
+   */
   addMovieToFavorites(movieID: string, title: string): void {
     this.fetchApiData.addFavoriteMovie(this.username, movieID).subscribe((resp: any) => {
-      this.favorites = resp.FavoriteMovies;
+      this.favorites = resp.FavoriteMovies; // add favorites to the favorites array
       console.log(this.favorites)
       this.snackBar.open(`${title} has been added to your favorites!`, 'OK',
         { duration: 4000, panelClass: 'snack-style' }
@@ -68,7 +77,11 @@ export class MovieCardComponent implements OnInit {
       );
     });
   }
-  // function to delete using an API call then updating the favorites array
+  /**
+   * 
+   * @param {string} movieID 
+   * @param {string} title 
+   */
   deleteMovieFromFavorites(movieID: string, title: string): void {
     this.fetchApiData.removeFavoriteMovie(this.username, movieID).subscribe((resp: any) => {
       this.favorites = resp.FavoriteMovies;
@@ -101,14 +114,20 @@ export class MovieCardComponent implements OnInit {
     let movieIds = this.favorites.map(favorite => { return favorite });
     return movieIds.includes(movieId) ? 'warn' : 'primary';
   }
-
+  // dialog to open the favorites the users favorited
   openFavoritesViewDialog(): void {
     this.dialog.open(FavoritedMoviesViewComponent, {
       width: '100%',
     })
   }
 
-  // dialog to open a modal of the single movieView taking parameters to pass information on the movie array
+  /**
+   * dialog to open a modal of the single movieView taking parameters to pass information on the movie array
+   * @param {string} title 
+   * @param {string} description 
+   * @param {boolean} featured 
+   * @param {string} imagepath 
+   */
   openMovieViewDialog(
     title: string,
     description: string,
@@ -125,7 +144,12 @@ export class MovieCardComponent implements OnInit {
       width: '80%'
     });
   }
-  // dialog to open a modal of the directorView taking parameters to pass information on the movie array
+
+  /**
+   * dialog to open a modal of the directorView taking parameters to pass information on the movie array
+   * @param {string} name 
+   * @param {string} bio 
+   */
   openDirectorViewDialog(
     name: string,
     bio: string,
@@ -139,7 +163,11 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
-  // dialog to open a modal of the genreView taking parameters to pass information on the movie array
+  /**
+   * dialog to open a modal of the genreView taking parameters to pass information on the movie array
+   * @param {string} title 
+   * @param {string} description 
+   */
   openGenreViewDialog(
     title: string,
     description: string,

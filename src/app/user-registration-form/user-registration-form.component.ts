@@ -27,12 +27,16 @@ export class UserRegistrationFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  // this is the function responsible for sending the form inputs to the backend 
+  /**
+ * @param {object} userData - the object with pertaining data (Username, Password, Email, Birthday)
+ * @returns {Token, Object}
+ * After userData is passed, API will send back a token and we can set token to localStorage
+ */
   registerUser(): void {
     this.fetchApiData.userRegistration(this.userData).subscribe((response) => {
       // logic for a successful user registration goes here!
       this.dialogRef.close(); // the modal to be closed on success
-      this.loginUser(this.userData.Username, this.userData.Password);
+      this.loginUser(this.userData.Username, this.userData.Password); // Perform a login on success of registering
       this.snackBar.open(`Welcome ${this.userData.Username}`, 'OK', {
         duration: 3000
       });
@@ -43,7 +47,16 @@ export class UserRegistrationFormComponent implements OnInit {
     });
   }
 
+  /**
+ * @param {object} userData - the object with pertaining data (Username, Password)
+ * @returns Token
+ * After userData is passed, API will send back a token and we can set token to localStorage
+ */
   loginUser(username: string, password: string): void {
+    /**
+     * set the userObject with required params, Username, Password
+     * @param {object} - {Username, Password}
+     */
     let userObject = { Username: username, Password: password }
     this.fetchApiData.userLogin(userObject).subscribe((response) => {
       this.dialogRef.close();

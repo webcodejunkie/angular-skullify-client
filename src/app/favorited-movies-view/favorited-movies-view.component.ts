@@ -9,9 +9,19 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class FavoritedMoviesViewComponent implements OnInit {
 
-  username = localStorage.getItem('user');
+  username = localStorage.getItem('user'); // set the localStorage of user to username variable
+  /**
+   * The favorites array will be used at the start of the components lifecycle, a function getFavoriteMovies will be used to store
+   * information that already exists to prevent duplication
+   */
   favorites: any[] = [];
+  /**
+   * movies array set to a function getMovies which will hold all the movies that exist in the DB
+   */
   movies: any[] = [];
+  /**
+   * active array which will be used to capture currently favorited movies and will be used to manipulate
+   */
   active: any[] = [];
 
   constructor(
@@ -40,6 +50,7 @@ export class FavoritedMoviesViewComponent implements OnInit {
    * this function is in conjunction with getMovies, using it as a filter for the response. 
    * It will run a forEach method and if the favorites that we pushed into an array match the id. 
    * Then we will push a movie into a new array called active
+   * @returns {Array}
    */
   filterMovies(res: any): void {
     res.forEach((movie: any) => {
@@ -52,11 +63,16 @@ export class FavoritedMoviesViewComponent implements OnInit {
     console.log(this.active);
   }
 
-  // this function removes a certain movie off the active array
+  /**
+   * This method will delete a movie off a FavoriteMovies array through the API but also slice that very same movie off the active array
+   * @param {string} movieID 
+   * @param {string} title 
+   * @param {any} movie 
+   */
   deleteMovieFromFavorites(movieID: string, title: string, movie: any): void {
     this.fetchApiData.removeFavoriteMovie(this.username, movieID).subscribe((res: any) => {
       // find the index of the array, so we can use to splice
-      const index = this.active.indexOf(movie);
+      const index = this.active.indexOf(movie); // find the index of the movie that will help with deleteing chosen movie
       if (index > -1) {
         this.active.splice(index, 1);
       }

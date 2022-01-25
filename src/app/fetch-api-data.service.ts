@@ -13,7 +13,11 @@ export class FetchApiDataService {
   // This will provide HttpClient to the entire class, making it available via this.http
   constructor(private http: HttpClient) { }
 
-  // Making the api call for the user registration endpoint
+  /**
+   * 
+   * @param userDetails 
+   * @returns 
+   */
   public userRegistration(userDetails: any): Observable<any> {
     console.log(userDetails);
     return this.http.post(apiUrl + 'register', userDetails).pipe(
@@ -21,7 +25,11 @@ export class FetchApiDataService {
     );
   }
 
-  // API call to login
+  /**
+   * 
+   * @param userDetails 
+   * @returns 
+   */
   userLogin(userDetails: any): Observable<any> {
     console.log(userDetails);
     const token = localStorage.getItem('token');
@@ -34,7 +42,11 @@ export class FetchApiDataService {
       catchError(this.handleError)
     );
   }
-  // API call to get user information
+  /**
+   * 
+   * @param {any} username 
+   * @returns 
+   */
   getUser(username: any): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http.get(apiUrl + 'users/' + username, {
@@ -47,7 +59,13 @@ export class FetchApiDataService {
       catchError(this.handleError)
     );
   }
-  // API call to edit user
+
+  /**
+   * 
+   * @param username 
+   * @param userDetails 
+   * @returns 
+   */
   editUser(username: string, userDetails: any): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http.put(apiUrl + 'users/' + username, userDetails, {
@@ -60,7 +78,12 @@ export class FetchApiDataService {
       catchError(this.handleError)
     );
   }
-  // API call to delete user
+
+  /**
+   * 
+   * @param username 
+   * @returns 
+   */
   deleteUser(username: string): Observable<any> {
     const token = localStorage.getItem('token');
     const response = this.http.delete(apiUrl + 'users/' + username,
@@ -72,7 +95,11 @@ export class FetchApiDataService {
     );
     return response.pipe(catchError(this.handleError));
   }
-  // API to get full list of movies
+
+  /**
+   * 
+   * @returns {object} - movies
+   */
   getAllMovies(): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http.get(apiUrl + 'movies', {
@@ -85,7 +112,12 @@ export class FetchApiDataService {
       catchError(this.handleError)
     )
   }
-  // API call to get a single movie
+
+  /**
+   * 
+   * @param title 
+   * @returns 
+   */
   getMovie(title: any): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http.get(apiUrl + 'movies' + title, {
@@ -98,7 +130,13 @@ export class FetchApiDataService {
       catchError(this.handleError)
     );
   }
-  // API call to favorite a single movie and add it to users favorited array
+
+  /**
+   * 
+   * @param username 
+   * @param movieID 
+   * @returns 
+   */
   addFavoriteMovie(username: string, movieID: any): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http.post(apiUrl + `users/${username}/movies/${movieID}`, {}, {
@@ -111,7 +149,13 @@ export class FetchApiDataService {
       catchError(this.handleError)
     );
   }
-  // API call to remove favorited movie from user array
+
+  /**
+   * 
+   * @param username 
+   * @param movieID 
+   * @returns 
+   */
   removeFavoriteMovie(username: any, movieID: any): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http.delete(apiUrl + `users/${username}/movies/${movieID}`, {
@@ -124,7 +168,12 @@ export class FetchApiDataService {
       catchError(this.handleError)
     );
   }
-  // API call to get director details from movie
+
+  /**
+   * 
+   * @param director 
+   * @returns 
+   */
   getDirector(director: any): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http.get(apiUrl + 'directors/' + director, {
@@ -137,7 +186,11 @@ export class FetchApiDataService {
       catchError(this.handleError)
     );
   }
-  // API call to get genre about movie
+  /**
+   * 
+   * @param genre 
+   * @returns 
+   */
   getGenre(genre: any): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http.get(apiUrl + 'genres/' + genre, {

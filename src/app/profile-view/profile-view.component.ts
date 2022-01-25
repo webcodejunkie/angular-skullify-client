@@ -21,9 +21,11 @@ export class ProfileViewComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getProfile();
+    this.getProfile(); // on initalization get the profile of the user
   }
-
+  /**
+   * @requires username
+   */
   getProfile(): void {
     this.fetchApiData.getUser(this.username!).subscribe((response: any) => {
       this.user = response;
@@ -31,6 +33,7 @@ export class ProfileViewComponent implements OnInit {
     });
   }
 
+  // dialog to open the edit user component
   openEditUserDialog(): void {
     this.dialog.open(EditUserViewComponent, {
       width: '100%',

@@ -11,6 +11,7 @@ export class DirectorViewComponent implements OnInit {
   constructor(
     /**
      * @emits data - used to inject data from the parent component 
+     * takes data passed in through the parent component
      */
     @Inject(MAT_DIALOG_DATA) public data: { name: string, bio: string }
 

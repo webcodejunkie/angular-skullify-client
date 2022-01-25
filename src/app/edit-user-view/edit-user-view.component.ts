@@ -13,9 +13,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./edit-user-view.component.scss']
 })
 export class EditUserViewComponent implements OnInit {
-
+  /**
+   * initalize this component with a user which is connected to an object
+   */
   user: any = {};
-  username = localStorage.getItem('user');
+  username = localStorage.getItem('user'); // set localStorage on variable username
 
   @Input() userData = { Username: '', Password: '', Email: '', Birthday: '', }
 
@@ -28,6 +30,13 @@ export class EditUserViewComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  /**
+   * @method editUser
+   * @param {string} username - Username of the User
+   * @param {object} userData - an object containing modified user details
+   * @returns {object} - The edited user
+   */
 
   editUser(): void {
     this.fetchApiData.editUser(this.username!, this.userData).subscribe((res) => {
@@ -42,6 +51,12 @@ export class EditUserViewComponent implements OnInit {
       })
     })
   }
+
+  /**
+ * @method deletedUser
+ * @param {string} username - Username of the User
+ * @returns {response} - The user is deleted
+ */
 
   deleteUser(): void {
     this.fetchApiData.deleteUser(this.username!).subscribe((res) => {
