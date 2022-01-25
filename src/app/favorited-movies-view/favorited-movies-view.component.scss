@@ -3,10 +3,15 @@
   background-color: #202124;
 }
 
+.favorited-header { 
+  display: flex;
+  justify-content: space-between;
+}
+
 .favorited-card {
   margin: 20px; 
   padding: 1rem; 
-  background-color: 
-  rgb(48 48 48); 
+  background-color: rgb(48 48 48); 
   color: white;
+  width: 250px;
 }

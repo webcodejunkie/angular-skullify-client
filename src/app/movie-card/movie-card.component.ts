@@ -27,11 +27,12 @@ export class MovieCardComponent implements OnInit {
     public dialog: MatDialog,
     public snackBar: MatSnackBar,
     private router: Router,
-  ) { }
+  ) { dialog.afterAllClosed.subscribe(() => this.ngOnInit()) }
 
   ngOnInit(): void {
     this.getMovies();
     this.getFavMovies();
+    this.isFav;
   }
   // function to logg the user out and return them to the welcome screen
   onLogOut(): void {
