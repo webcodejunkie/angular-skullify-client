@@ -1,6 +1,6 @@
 <div class="favorited-header">
   <h1>Your Favorites</h1>
-  <button mat-icon-button>
+  <button mat-icon-button class="hover-close-button">
     <mat-icon [mat-dialog-close]="true">close</mat-icon>
   </button>
 </div>
@@ -13,7 +13,7 @@
     <mat-card-actions style="align-items: center; display: flex; flex-direction: column-reverse;">
       <button mat-icon-button aria-label="remove movie from favorites"
         (click)="deleteMovieFromFavorites(movie._id, movie.Title, movie)">
-        <mat-icon aria-label="heart icon">delete</mat-icon>
+        <mat-icon aria-label="trash icon" class="trash-button">delete</mat-icon>
       </button>
     </mat-card-actions>
   </mat-card>

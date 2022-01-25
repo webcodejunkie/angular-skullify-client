@@ -149,7 +149,7 @@ export class MovieCardComponent implements OnInit {
         title: title,
         description: description,
       },
-      width: '50%'
+      width: '50%',
     });
   }
   // dialog to pop up a modal of the profile view for the user to interact with

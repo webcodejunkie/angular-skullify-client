@@ -1,7 +1,7 @@
 <!-- src/app/movie-card/movie-card.component.html -->
 <p>
-  <mat-toolbar style="background-color: #202124; color: white" class="toolbar-wrapper">
-    <span>Skullify</span>
+  <mat-toolbar style="background-color: #000; color: white" class="toolbar-wrapper">
+    <span class="app-title">Skullify</span>
     <div>
       <button mat-icon-button (click)="openFavoritesViewDialog()">
         <mat-icon>favorite</mat-icon>
@@ -16,13 +16,13 @@
   </mat-toolbar>
 </p>
 <div class="movie-list-wrapper">
-  <mat-card *ngFor="let movie of movies;" class="movie-card">
-    <mat-card-header>
-      <mat-card-title>{{movie.Title}}</mat-card-title>
-      <mat-card-subtitle>Directed by: {{movie.Director.Name}}</mat-card-subtitle>
-    </mat-card-header>
+  <div *ngFor="let movie of movies;" class="movie-card">
+    <div class="movie-card-header">
+      <div class="movie-card-title">{{movie.Title}}</div>
+      <div class="movie-card-director">Directed by: {{movie.Director.Name}}</div>
+    </div>
     <img class="movie-poster-image" src={{movie.ImagePath}} alt={{movie.Title}} />
-    <mat-card-actions style="align-items: center; display: flex; flex-direction: column-reverse;">
+    <div style="align-items: center; display: flex; flex-direction: column-reverse;">
       <button mat-button color="primary" (click)="openGenreViewDialog(
         movie.Genre.Title,
         movie.Genre.Description
@@ -43,9 +43,10 @@
       )">
         Synopsis
       </button>
-      <button mat-icon-button (click)="toggleFav(movie._id, movie.Title)" [color]="isFav(movie._id)">
+      <button mat-icon-button class="heart-button" (click)="toggleFav(movie._id, movie.Title)"
+        [color]="isFav(movie._id)">
         <mat-icon>favorite</mat-icon>
       </button>
-    </mat-card-actions>
-  </mat-card>
+    </div>
+  </div>
 </div>

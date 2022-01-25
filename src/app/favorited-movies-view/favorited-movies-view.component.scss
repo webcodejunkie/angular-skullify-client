@@ -1,6 +1,8 @@
 .favorited-wrapper {
   display: flex;
-  background-color: #202124;
+  width: 100%;
+  overflow-x: scroll;
+  background: #1e1e1e;
 }
 
 .favorited-header { 
@@ -14,4 +16,40 @@
   background-color: rgb(48 48 48); 
   color: white;
   width: 250px;
+}
+
+.hover-close-button {
+  transition: .5s;
+  background-color: transparent;
+  &:hover {
+    background-color: #2ce1bf;
+    transition: .5s;
+  }
+}
+
+@keyframes moving-can {
+  from {
+    transform: rotate(0deg) translateY(0px);
+  }
+
+  50% {
+    transform: rotate(140deg) translateY(4px);
+  }
+
+  60% {
+    transform: rotate(145deg) translateY(0px);
+  }
+
+  to {
+    transform: rotate(0deg) translateY(0px);
+  }
+}
+
+.trash-button {
+  &:hover {
+    animation-name: moving-can;
+    animation-direction: normal;
+    animation-duration: 2.5s;
+    animation-iteration-count: infinite;
+  }
 }

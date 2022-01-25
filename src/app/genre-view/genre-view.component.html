@@ -1,6 +1,10 @@
 <div>
-  <mat-icon [mat-dialog-close]="true">close</mat-icon>
-  <h1>Genre</h1>
+  <div style="display: flex; justify-content: space-between;">
+    <h1>Genre</h1>
+    <button mat-icon-button class="hover-close-button">
+      <mat-icon [mat-dialog-close]="true">close</mat-icon>
+    </button>
+  </div>
   <h2>{{data.title}}</h2>
   <p>{{data.description}}</p>
 </div>
